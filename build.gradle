@@ -1,25 +1,29 @@
 plugins {
-    id 'java-library'
+    id 'java'
 }
+
+group 'guru.qa'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-compileJava {
-    options.encoding = 'UTF-8'
-}
-compileTestJava {
-    options.encoding = 'UTF-8'
-}
-
 dependencies {
     testImplementation (
-            "com.codeborne:selenide:7.9.0",
-            "org.junit.jupiter:junit-jupiter:5.10.0",
-            "com.github.javafaker:javafaker:1.0.2",
-            "org.slf4j:slf4j-simple:1.7.29"
-            )
+            'org.junit.jupiter:junit-jupiter:5.9.2',
+            'com.codeborne:selenide:6.11.1',
+            'org.assertj:assertj-core:3.24.1',
+            'com.codeborne:pdf-test:1.5.0',
+            'com.codeborne:xls-test:1.4.3',
+            'com.opencsv:opencsv:5.7.1',
+            'com.fasterxml.jackson.core:jackson-core:2.14.1',
+            'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+    )
+
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 test {
