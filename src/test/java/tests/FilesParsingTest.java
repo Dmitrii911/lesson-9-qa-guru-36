@@ -20,7 +20,7 @@ public class FilesParsingTest {
 
     private ClassLoader cl = FilesParsingTest.class.getClassLoader();
 
-    @DisplayName("Проверка содержимого CSV-файла из ZIP архива")
+    @DisplayName("Проверка содержимого CSV-файла из ZIP-архива")
     @Test
     void readFileCsvFromArchive() throws Exception {
         try (ZipInputStream zis = new ZipInputStream(cl.getResourceAsStream("zip.zip"),
