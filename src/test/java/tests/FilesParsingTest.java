@@ -20,7 +20,7 @@ public class FilesParsingTest {
 
     private ClassLoader cl = FilesParsingTest.class.getClassLoader();
 
-    @DisplayName("Проверка содержимого ZIP-архива")
+    @DisplayName("Проверка содержимого ZIP архива")
     @Test
     void zipFileParsingTest() throws Exception {
         try (ZipInputStream zipInput = new ZipInputStream(
