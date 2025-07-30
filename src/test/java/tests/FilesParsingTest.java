@@ -44,8 +44,10 @@ public class FilesParsingTest {
         ) {
 
             ZipEntry entry;
+            boolean csvFile = false;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith(".csv")) {
+                    csvFile = true;
                     try (CSVReader csvReader = new CSVReader(new InputStreamReader(zis))) {
                         List<String[]> data = csvReader.readAll();
                         Assertions.assertEquals(4, data.size());
@@ -69,6 +71,7 @@ public class FilesParsingTest {
                     break;
                 }
             }
+            Assertions.assertTrue(csvFile, "CSV файл не найден");
         }
     }
 
@@ -81,14 +84,16 @@ public class FilesParsingTest {
         ) {
 
             ZipEntry entry;
+            boolean pdfFile = false;
             while ((entry = zis.getNextEntry()) != null) {
+                pdfFile = true;
                 if (entry.getName().endsWith(".pdf")) {
                     PDF pdf = new PDF(zis);
                     Assertions.assertEquals("pdftk 2.01 - www.pdftk.com", pdf.creator);
                     break;
                 }
-                zis.closeEntry();
             }
+            Assertions.assertTrue(pdfFile, "PDF файл не найден");
         }
     }
 
@@ -99,13 +104,16 @@ public class FilesParsingTest {
                 cl.getResourceAsStream("zip.zip"), Charset.forName("windows-1251")
         )) {
             ZipEntry entry;
+            boolean xlsxFile = false;
             while ((entry = zipInput.getNextEntry()) != null) {
+                xlsxFile = true;
                 if (entry.getName().endsWith(".xlsx")) {
                     XLS xls = new XLS(zipInput);
                     String actualValue = xls.excel.getSheetAt(0).getRow(0).getCell(0).getStringCellValue();
                     assertThat(xls,containsText("Auth Service With Credentials"));
                 }
             }
+            Assertions.assertTrue(xlsxFile, "xlsx файл не найден");
         }
     }
 }
